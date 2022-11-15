@@ -1,0 +1,84 @@
+.root-container {
+  width: 100%;
+  height: 100vh;
+  background: white;
+}
+
+.registration-card-holder {
+  width: 20rem;
+  height: 10rem;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title-holder {
+    font-family: 'Lobster', cursive;
+    font-size: 6rem;
+  }
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+
+  .form-row {
+    .form-group {
+      .label {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        margin: .5rem 0;
+      }
+
+      input {
+        border: none;
+        background: rgba(6, 97, 99, 0.1);
+        border-radius: 10px;
+        padding: .7rem 1.2rem;
+        margin: .5rem 0;
+        font-family: 'Roboto', sans-serif;
+      }
+    }
+  }
+}
+
+.actions-holder {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sign-up-button {
+  border: none;
+  background: rgba(6, 97, 99, 9);
+  padding: .7rem 1.2rem;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.google-signup-button {
+  border: none;
+  background: rgba(6, 97, 99, 9);
+  padding: .7rem 1.2rem;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  margin-top: 1rem;
+  svg {
+    width: 1rem;
+    height: 1rem;
+    fill: white;
+  }
+}
+
+.color-green {
+  color: #066163;
+}
+
+.color-grey {
+  color: #383838;
+}

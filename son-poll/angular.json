@@ -107,5 +107,7 @@
       }
     }
   },
-  "defaultProject": "son-poll"
+  "cli": {
+    "analytics": "52ab8c23-d1c2-4711-a248-1ba479501f07"
+  }
 }
