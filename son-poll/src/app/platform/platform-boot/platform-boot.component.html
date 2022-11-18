@@ -1,2 +1,25 @@
-<p>platform-boot works!</p>
-<router-outlet></router-outlet>
+<p-splitter [style]="{'height': '100vh', 'width': '100%'}" [panelSizes]="[20,80]" [minSizes]="[15,70]">
+  <ng-template pTemplate>
+    <div class="sidebar-root">
+      <div class="sidebar-title">
+        <div class="title-holder">
+          <span class="color-green">S</span>
+          <span class="color-grey">on</span>
+          <span class="color-green">P</span>
+          <span class="color-grey">oll</span>
+        </div>
+      </div>
+      <div class="main-button-holder">
+        <div class="create-join-button">
+          <div class="create-button">CREATE</div>
+          <div class="join-button">JOIN</div>
+        </div>
+      </div>
+      <div class="content-holder">
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate>
+    <router-outlet></router-outlet>
+  </ng-template>
+</p-splitter>

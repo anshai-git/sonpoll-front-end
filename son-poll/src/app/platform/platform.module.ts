@@ -9,6 +9,7 @@ import { UserVotesComponent } from './views/user-votes/user-votes.component';
 import { UserAccountComponent } from './views/user-account/user-account.component';
 import { EditPollComponent } from './views/edit-poll/edit-poll.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import {SplitterModule} from 'primeng/splitter';
 
 
 @NgModule({
@@ -19,11 +20,12 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
     UserVotesComponent,
     UserAccountComponent,
     EditPollComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
-    PlatformRoutingModule
+    PlatformRoutingModule,
+    SplitterModule
   ]
 })
 export class PlatformModule { }

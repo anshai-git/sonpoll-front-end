@@ -8,26 +8,54 @@
     </div>
     <div class="registration-card">
       <div class="form-holder">
-        <form class="registration-form">
+        <form [formGroup]="signUpForm" class="registration-form">
           <div class="form-row">
             <div class="form-group">
-              <input type="text" placeholder="email">
+              <input type="text" placeholder="email" formControlName="email" pInputText class="p-inputtext-sm" />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <input type="text" placeholder="username">
+              <input type="text" placeholder="username" formControlName="username" pInputText class="p-inputtext-sm"/>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <input type="password" placeholder="password">
+              <input type="password" placeholder="password" formControlName="password" pInputText class="p-inputtext-sm"/>
             </div>
+          </div>
+          <div class="form-row">
+          <div class="form-group">
+              <input id="passwordconfirmation"
+                     type="password"
+                     placeholder="confirm password"
+                     pInputText
+                     formControlName="passwordConfirmation"
+                     class="p-inputtext-sm">
+          </div>
           </div>
         </form>
         <div class="actions-holder">
-          <button class="sign-up-button">Sign Up</button>
-          <button class="google-signup-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg></button>
+          <div class="buttons-holder"
+               *ngIf="!isActionInProgress else elseBlock">
+            <button
+              pButton
+              type="button"
+              class="sign-up-button p-button-rounded p-button-outlined"
+              [disabled]="!signUpForm.valid"
+              (click)="onSignUp()">
+              Sign up
+            </button>
+            <button pButton pRipple type="button" class="google-signup-button p-button-rounded">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
+                <path
+                  d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/>
+              </svg>
+            </button>
+          </div>
+          <ng-template #elseBlock class="spinner-holder">
+            <p-progressSpinner></p-progressSpinner>
+          </ng-template>
         </div>
       </div>
     </div>

@@ -1,1 +1,30 @@
-<p>log-in works!</p>
+<div class="log-in-card">
+  <div class="title-holder">
+    <span class="color-green">S</span>
+    <span class="color-grey">on</span>
+    <span class="color-green">P</span>
+    <span class="color-grey">oll</span>
+  </div>
+
+  <div class="log-in-form-holder">
+    <form class="log-in-form" [formGroup]="logInForm">
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" placeholder="username" formControlName="username">
+        </div>
+      </div>
+      <div class="form-row">
+<!--        TODO: DUPLICATE PASSWORD FIELD TO MAKE SURE THE PASSWORD INTRODUCED IS CORRECT-->
+        <div class="form-group">
+          <input type="password" placeholder="password" formControlName="password">
+        </div>
+      </div>
+    </form>
+    <div class="actions-holder">
+      <button *ngIf="!isAnyActionInProgress else elseCase" class="log-in-button" [disabled]="!logInForm.valid" (click)="onLogIn()">Log in</button>
+      <ng-template #elseCase>
+        <p-progressSpinner [style]="{width: '25px', height: '25px'}"></p-progressSpinner>
+      </ng-template>
+    </div>
+  </div>
+</div>

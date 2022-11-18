@@ -1,0 +1,66 @@
+.log-in-card {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-holder {
+  font-family: 'Lobster', cursive;
+  font-size: 6rem;
+}
+
+.color-green {
+  color: #066163;
+}
+
+.color-grey {
+  color: #383838;
+}
+
+.form-row {
+  .form-group {
+    .label {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      margin: .5rem 0;
+    }
+
+    input {
+      border: none;
+      background: rgba(6, 97, 99, 0.1);
+      border-radius: 10px;
+      padding: .7rem 1.2rem;
+      margin: .5rem 0;
+      font-family: 'Roboto', sans-serif;
+    }
+  }
+}
+
+.actions-holder {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.log-in-button {
+  border: none;
+  padding: .6rem 1.2rem;
+  background: rgba(6, 97, 99, 1);
+  border-radius: 10px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 250ms all;
+  &[disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: default;
+  }
+}

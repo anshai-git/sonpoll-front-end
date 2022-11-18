@@ -4,6 +4,18 @@ import { CommonModule } from '@angular/common';
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterBootComponent } from './register-boot/register-boot.component';
 import { RegistrationComponent } from './views/registration/registration.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
+import {EffectsModule} from '@ngrx/effects';
+import {RegistrationEffects} from './ngrx/registration.effects';
+import {StoreModule} from '@ngrx/store';
+import {registrationReducer} from './ngrx/registration.reducer';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
+import {RippleModule} from 'primeng/ripple';
 
 
 @NgModule({
@@ -13,7 +25,19 @@ import { RegistrationComponent } from './views/registration/registration.compone
   ],
   imports: [
     CommonModule,
-    RegisterRoutingModule
+    RegisterRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    ToastModule,
+    ProgressSpinnerModule,
+    InputTextModule,
+    StoreModule.forFeature('registration', {register: registrationReducer}),
+    EffectsModule.forFeature([RegistrationEffects]),
+    ButtonModule,
+    RippleModule,
+  ],
+  providers: [
+    MessageService
   ]
 })
 export class RegisterModule { }
