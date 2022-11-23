@@ -1,13 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
-import {SignUpRequest} from '../../../sp-common/request/sign-up.request';
-import {ApiRequest} from '../../../sp-common/api/ApiRequest';
-import {signUp} from '../../ngrx/registration.actions';
 import {Subscription} from 'rxjs';
 import {selectActionStatus} from '../../ngrx/registration.selectors';
 import {RegistrationState} from '../../ngrx/regitration.store';
-import {group} from '@angular/animations';
+import {SignUpRequest} from "../../../sp-common/request/sign-up.request";
+import {ApiRequest} from "../../../sp-common/api/ApiRequest";
+import {signUp} from "../../ngrx/registration.actions";
 
 @Component({
   selector: 'app-registration',
@@ -23,11 +22,11 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     private store$: Store<RegistrationState>
   ) {
     this.signUpForm = formBuilder.group({
-      email: formBuilder.control('', [Validators.required]),
+      email: formBuilder.control('', [Validators.required, Validators.email]),
       username: formBuilder.control('', [Validators.required]),
       password: formBuilder.control('', [Validators.required]),
       passwordConfirmation: formBuilder.control('', [Validators.required, this.checkPasswordMatching]),
-    } )
+    });
   }
 
   isActionInProgress!: boolean;
@@ -44,24 +43,17 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   onSignUp() {
-    // const { email, username, password } = this.signUpForm.value;
-    // const signUpRequest: SignUpRequest = new SignUpRequest(email, username, password);
-    // const apiRequest: ApiRequest<SignUpRequest> = ApiRequest.of<SignUpRequest>(signUpRequest);
-    // const actionPayload = { payload: apiRequest };
-    //
-    // this.store$.dispatch(signUp(actionPayload));
-    // this.signUpForm.reset();
+    const { email, username, password } = this.signUpForm.value;
+    const signUpRequest: SignUpRequest = new SignUpRequest(email, username, password);
+    const apiRequest: ApiRequest<SignUpRequest> = ApiRequest.of<SignUpRequest>(signUpRequest);
+    const actionPayload = { payload: apiRequest };
 
-    console.log(this.signUpForm);
+    this.store$.dispatch(signUp(actionPayload));
+    this.signUpForm.reset();
   }
 
-  get arePasswordsMatching() {
-    return !this.signUpForm?.get('passwordConfirmation')?.errors;
-  }
-
-  checkPasswordMatching: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
-    const password = group.get('password')?.value;
-    const confirmation = group.get('passwordConfirmation')?.value;
-    return password === confirmation ? null : { isMatching: false }
+  checkPasswordMatching: ValidatorFn = (confirmation: AbstractControl): ValidationErrors | null => {
+    const password = this.signUpForm?.get('password')?.value;
+    return password === confirmation.value ? null : { invalidPasswordConfirmation: true }
   }
 }

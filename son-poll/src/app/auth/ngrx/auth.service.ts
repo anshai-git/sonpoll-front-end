@@ -28,15 +28,12 @@ export class AuthService {
   }
 
   handleLogInSuccess(response: LogInResponse) {
-    console.log(response);
-    // document.cookie = `SP_AUTH_TOKEN=${response.payload.token}`;
     this.cookieService.put('SP_AUTH_TOKEN', response.token);
     this.router.navigate(['test']);
   }
 
   isAuthenticated(): boolean {
     const token = this.cookieService.get('SP_AUTH_TOKEN')
-    console.log(token);
     let isAuthenticated;
     try {
       isAuthenticated = !this.jwtHelper.isTokenExpired(token);

@@ -17,6 +17,7 @@ export class LogInComponent implements OnInit {
   isAnyActionInProgress!: boolean;
   actionStatusSubscription!: Subscription;
   logInForm: FormGroup;
+  rememberUser = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,5 +44,9 @@ export class LogInComponent implements OnInit {
     const logInActionPayload = { payload: apiRequest };
 
     this.store$.dispatch(logIn(logInActionPayload));
+  }
+
+  onForgotPassword() {
+
   }
 }

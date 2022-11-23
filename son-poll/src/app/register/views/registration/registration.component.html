@@ -31,7 +31,7 @@
                      placeholder="confirm password"
                      pInputText
                      formControlName="passwordConfirmation"
-                     class="p-inputtext-sm">
+                     [disabled]="!signUpForm.valid">
           </div>
           </div>
         </form>
@@ -42,7 +42,6 @@
               pButton
               type="button"
               class="sign-up-button p-button-rounded p-button-outlined"
-              [disabled]="!signUpForm.valid"
               (click)="onSignUp()">
               Sign up
             </button>

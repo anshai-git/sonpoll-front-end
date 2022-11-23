@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {act, Actions, createEffect, ofType} from '@ngrx/effects';
 import {AuthActions, logIn, logInFailure, logInSuccess} from './auth.actions';
-import {catchError, EMPTY, map, mergeMap, of, tap} from 'rxjs';
+import {catchError, EMPTY, EmptyError, map, mergeMap, of, tap} from 'rxjs';
 import {AuthService} from './auth.service';
 import {ApiResponse} from '../../sp-common/api/ApiResponse';
 import {LogInResponse} from '../../sp-common/response/log-in.response';
+import {log} from "util";
 
 @Injectable({providedIn: 'root'})
 export class AuthEffects {
@@ -17,8 +18,8 @@ export class AuthEffects {
   logIn$ = createEffect(() => this.actions$.pipe(
     ofType(logIn),
     mergeMap((action) => this.authService.logIn(action.payload).pipe(
-      map(response => this.handleLogInResponse(response)),
-      catchError(() => EMPTY)
+      map(response =>  this.handleLogInResponse(response)),
+      catchError(this.log_error)
     ))
   ))
 
@@ -26,7 +27,7 @@ export class AuthEffects {
     ofType(logInSuccess),
     mergeMap(action => of(action).pipe(
       tap(action => this.authService.handleLogInSuccess(action.payload.payload)),
-      catchError(() => EMPTY)
+      catchError(this.log_error)
     ))
   ), { dispatch: false })
 
@@ -34,7 +35,7 @@ export class AuthEffects {
     ofType(logIn),
     mergeMap(() => of(true).pipe(
       map(value => ({ type: AuthActions.SET_ACTION_STATUS, payload: value })),
-      catchError(() => EMPTY)
+      catchError(this.log_error)
     ))
   ))
 
@@ -42,14 +43,20 @@ export class AuthEffects {
     ofType(logInSuccess, logInFailure),
     mergeMap(() => of(false).pipe(
       map(value => ({ type: AuthActions.SET_ACTION_STATUS, payload: value })),
-      catchError(() => EMPTY)
+      catchError(this.log_error)
     ))
   ))
 
   private handleLogInResponse(response: ApiResponse<LogInResponse>) {
+    console.log(response);
     return !response.error ?
       ({type: AuthActions.LOG_IN_SUCCESS, payload: response})
       :
       ({type: AuthActions.LOG_IN_FAILURE, payload: response})
+  }
+
+  private log_error = (err: any) => {
+    console.log(err);
+    return EMPTY;
   }
 }
