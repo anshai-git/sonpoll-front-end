@@ -46,3 +46,23 @@
     </div>
   </div>
 </div>
+
+<p-dialog styleClass="forgot-password-dialog" [modal]="true" [(visible)]="isForgotPasswordDialogVisible" [style]="{width: '25rem'}">
+ <ng-template pTemplate="header">
+   <div class="title-holder">
+     <div class="main-title">Forgot password?</div>
+     <div class="subtitle">We'll send you reset instructions.</div>
+   </div>
+ </ng-template>
+  <ng-template pTemplate="content">
+    <div class="content-holder">
+      <input type="text" placeholder="email"  pInputText class="p-inputtext-sm email-input"/>
+      <div class="button-holder">
+        <button pButton pRipple type="button" class="p-button-rounded reset-button" (click)="onSendPasswordResetEmail()">Send</button>
+        <ng-template  #elseCase>
+          <p-progressSpinner></p-progressSpinner>
+        </ng-template>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
