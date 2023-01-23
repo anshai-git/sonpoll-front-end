@@ -54,10 +54,17 @@
   }
 }
 
-.actions-holder .buttons-holder {
+.actions-holder {
   display: flex;
-  justify-content: space-between;
-  margin-top: 1.5rem;
+  align-items: center;
+  justify-content: center;
+
+  .buttons-holder {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    width: 100%;
+  }
 }
 
 .sign-up-button {
@@ -83,4 +90,18 @@
 
 .color-grey {
   color: #383838;
+}
+
+.login-btn-holder {
+  margin-top: 1rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  position: fixed;
+  top: 100%;
+  transform: translateY(-300%);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

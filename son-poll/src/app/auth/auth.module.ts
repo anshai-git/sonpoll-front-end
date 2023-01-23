@@ -13,7 +13,6 @@ import {authReducer} from './ngrx/auth.reducer';
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
-import { PasswordResetComponent } from './views/password-reset/password-reset.component';
 import {CheckboxModule} from "primeng/checkbox";
 import {DialogModule} from "primeng/dialog";
 
@@ -22,7 +21,6 @@ import {DialogModule} from "primeng/dialog";
   declarations: [
     LogInComponent,
     AuthBootComponent,
-    PasswordResetComponent
   ],
   imports: [
     CommonModule,

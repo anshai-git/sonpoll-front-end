@@ -26,7 +26,7 @@
           <label>Remeber me</label>
         </div>
         <div class="forgot-password-button-holder">
-          <div class="forgot-password-button" (click)="onForgotPassword()">forgot password?</div>
+          <div class="forgot-password-button" routerLink="/pr" >forgot password?</div>
         </div>
       </div>
     </div>
@@ -41,8 +41,12 @@
         </button>
       </div>
       <ng-template #elseCase>
-        <p-progressSpinner [style]="{width: '25px', height: '25px'}"></p-progressSpinner>
+        <p-progressSpinner [style]="{width: '30px', height: '30px', marginTop: '.5rem'}"></p-progressSpinner>
       </ng-template>
     </div>
   </div>
+</div>
+
+<div class="register-btn-holder">
+  Don't have an account yet? <a routerLink="/register">&nbsp;Register here</a>.
 </div>

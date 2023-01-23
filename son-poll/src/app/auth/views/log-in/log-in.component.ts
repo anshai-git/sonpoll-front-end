@@ -46,7 +46,4 @@ export class LogInComponent implements OnInit {
     this.store$.dispatch(logIn(logInActionPayload));
   }
 
-  onForgotPassword() {
-
-  }
 }

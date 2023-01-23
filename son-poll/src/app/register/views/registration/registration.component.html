@@ -42,7 +42,8 @@
               pButton
               type="button"
               class="sign-up-button p-button-rounded p-button-outlined"
-              (click)="onSignUp()">
+              (click)="onSignUp()"
+              [disabled]="!signUpForm.valid">
               Sign up
             </button>
             <button pButton pRipple type="button" class="google-signup-button p-button-rounded">
@@ -53,10 +54,15 @@
             </button>
           </div>
           <ng-template #elseBlock class="spinner-holder">
-            <p-progressSpinner></p-progressSpinner>
+            <p-progressSpinner [style]="{width: '30px', height: '30px', marginTop: '1.5rem'}" ></p-progressSpinner>
           </ng-template>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+
+<div class="login-btn-holder">
+  Already have an account? <a routerLink="/auth">&nbsp;Log in here</a>.
 </div>
