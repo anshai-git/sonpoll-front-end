@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ApiResponse} from '../../sp-common/api/ApiResponse';
 import {LogInResponse} from '../../sp-common/response/log-in.response';
-import endpoints, {LOG_IN, RESET_PASSWORD} from '../../sp-common/api/endpoints';
+import endpoints, {LOG_IN, PASSWORD_RESET} from '../../sp-common/api/endpoints';
 import {ApiRequest} from '../../sp-common/api/ApiRequest';
 import {LogInRequest} from '../../sp-common/request/log-in.request';
 import {Router} from '@angular/router';
@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   sendPasswordResetEmail(request: ApiRequest<SendPasswordResetEmailRequest>): Observable<ApiResponse<any>> {
-    return this.http.post<ApiResponse<any>>(endpoints[RESET_PASSWORD], request);
+    return this.http.post<ApiResponse<any>>(endpoints[PASSWORD_RESET], request);
   }
 
   logOut() {

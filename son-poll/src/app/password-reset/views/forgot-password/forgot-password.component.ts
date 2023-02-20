@@ -13,7 +13,6 @@ import { Router } from '@angular/router'
   providers: [MessageService]
 })
 export class ForgotPasswordComponent implements OnInit {
-
   isLoading: boolean;
   resetPasswordForm: FormGroup;
 
@@ -38,16 +37,16 @@ export class ForgotPasswordComponent implements OnInit {
     this.resetPasswordForm.reset();
     this.resetPasswordForm.disable();
     this.isLoading = true;
+
     this.passwordResetService.sendResetRequest(apiRequest).subscribe(response => {
       this.resetPasswordForm.enable();
       this.isLoading = false;
 
-      if(response.error) {
+      if (response.error) {
         this.primeToast.add({severity:'error', summary:'Failed to send reset email', detail:'No account found with the given email'});
       } else {
         this.router.navigate(['pr', 'emailVerification'])
       }
     })
   }
-
 }

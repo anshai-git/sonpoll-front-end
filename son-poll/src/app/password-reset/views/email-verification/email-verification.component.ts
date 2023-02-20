@@ -13,6 +13,11 @@ export class EmailVerification implements OnInit {
   }
 
   onResend(): void {
-   console.log('Not implemented');
+    // TODO: discuss resend strategy
+    console.log('Not implemented');
+  }
+
+  openUrl(url: string) {
+    window.open(url, "_blank");
   }
 }

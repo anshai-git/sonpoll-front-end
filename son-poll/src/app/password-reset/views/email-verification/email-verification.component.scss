@@ -51,8 +51,24 @@
   }
 }
 
-.actions > button {
-  width: 100%;
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > .mail-client-btn {
+    cursor: pointer;
+    margin: 0 1rem;
+    > svg {
+      width: 2rem;
+      height: 2rem;
+      fill: #183462;
+      transition: 200ms all;
+      &:hover {
+        fill: rgba(103, 156, 248, 1);
+      }
+    }
+  }
 }
 
 .resend-button-holder {
