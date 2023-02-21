@@ -11,7 +11,8 @@ import { ButtonModule } from 'primeng/button'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
 import { ToastModule } from 'primeng/toast'
-import { MessageService } from 'primeng/api'
+import { MessageService } from 'primeng/api';
+import { ResetFailureComponent } from './views/reset-failure/reset-failure.component'
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MessageService } from 'primeng/api'
     PasswordResetCompleteComponent,
     SetNewPasswordComponent,
     PasswordResetBootComponent,
+    ResetFailureComponent,
 
   ],
   imports: [
