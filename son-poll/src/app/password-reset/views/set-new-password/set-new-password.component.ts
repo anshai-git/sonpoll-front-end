@@ -5,6 +5,7 @@ import { pipe } from 'fp-ts/lib/function';
 import { fromNullable, match } from 'fp-ts/lib/Option';
 import { ApiRequest } from 'src/app/sp-common/api/ApiRequest';
 import { SetNewPasswordRequest } from 'src/app/sp-common/request/set-new-password.request';
+import { SetNewPasswordResponse } from 'src/app/sp-common/response/set-new-password.response';
 import { PasswordResetService } from '../../service/password-reset.service';
 
 @Component({
@@ -46,12 +47,13 @@ export class SetNewPasswordComponent implements OnInit {
         const apiRequest = ApiRequest.of(resetRequest);
 
         this.isActionInProgress = true;
+        // TODO: add this to mirage
         this.passwordResetService.sendSetNewPasswordRequest(apiRequest).subscribe(response => {
-            this.isActionInProgress = true;
+            this.isActionInProgress = false;
             if (response.error) {
                 this.handleResetFailure();
             } else {
-                this.handleResetSuccess();
+                this.handleResetSuccess(response.payload);
             }
         })
     }
@@ -60,7 +62,7 @@ export class SetNewPasswordComponent implements OnInit {
         this.router.navigate(['resetFailure']);
     }
 
-    handleResetSuccess() {
+    handleResetSuccess(response: SetNewPasswordResponse) {
         this.router.navigate(['passwordReset'])
     }
 
@@ -70,7 +72,7 @@ export class SetNewPasswordComponent implements OnInit {
             fromNullable,
             match(
                 this.handleInvalidToken.bind(this),
-                this.handleValidToken 
+                this.handleValidToken
             )
         )
     }

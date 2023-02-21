@@ -17,5 +17,4 @@ export class RegistrationService {
     return this.http.post<ApiResponse<SignUpResponse>>(`${endpoints[SIGN_UP]}`, request);
   }
 
-
 }

@@ -16,12 +16,16 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
+import { RegistrationSuccessComponent } from './views/registration-success/registration-success.component';
+import { RegistrationFailureComponent } from './views/registration-failure/registration-failure.component';
 
 
 @NgModule({
   declarations: [
     RegisterBootComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    RegistrationSuccessComponent,
+    RegistrationFailureComponent
   ],
   imports: [
     CommonModule,
