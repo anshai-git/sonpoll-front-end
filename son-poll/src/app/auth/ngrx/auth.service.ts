@@ -37,6 +37,7 @@ export class AuthService {
   // - populate it at password reset in case if we log in after it automagically
 
   handleLogInSuccess(response: LogInResponse) {
+
     this.cookieService.put('SP_AUTH_TOKEN', response.token);
     this.router.navigate(['test']);
   }
