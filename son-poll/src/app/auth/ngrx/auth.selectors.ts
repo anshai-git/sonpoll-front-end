@@ -6,4 +6,9 @@ export const selectAuthState = createFeatureSelector<{ auth: AuthStore }>('auth'
 export const selectAuthActionStatus = createSelector(
   selectAuthState,
   (authState) => authState.auth.isActionInProgress
+);
+
+export cosnt selectSignupFormData = createSelector(
+  selectAuthState,
+  (authState) => authState.
 )

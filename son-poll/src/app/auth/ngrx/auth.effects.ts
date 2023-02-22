@@ -1,13 +1,12 @@
-import {Injectable} from '@angular/core';
-import {act, Actions, createEffect, ofType} from '@ngrx/effects';
-import {AuthActions, logIn, logInFailure, logInSuccess} from './auth.actions';
-import {catchError, EMPTY, EmptyError, map, mergeMap, of, tap} from 'rxjs';
-import {AuthService} from './auth.service';
-import {ApiResponse} from '../../sp-common/api/ApiResponse';
-import {LogInResponse} from '../../sp-common/response/log-in.response';
-import {log} from "util";
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { AuthActions, logIn, logInFailure, logInSuccess } from './auth.actions';
+import { catchError, EMPTY, map, mergeMap, of, tap } from 'rxjs';
+import { AuthService } from './auth.service';
+import { ApiResponse } from '../../sp-common/api/ApiResponse';
+import { LogInResponse } from '../../sp-common/response/log-in.response';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthEffects {
   constructor(
     private actions$: Actions,
@@ -18,7 +17,7 @@ export class AuthEffects {
   logIn$ = createEffect(() => this.actions$.pipe(
     ofType(logIn),
     mergeMap((action) => this.authService.logIn(action.payload).pipe(
-      map(response =>  this.handleLogInResponse(response)),
+      map(response => this.handleLogInResponse(response)),
       catchError(this.log_error)
     ))
   ))
@@ -48,14 +47,16 @@ export class AuthEffects {
   ))
 
   private handleLogInResponse(response: ApiResponse<LogInResponse>) {
+    // TODO: remove console.log() for prod, eventually make it environment dependent
     console.log(response);
     return !response.error ?
-      ({type: AuthActions.LOG_IN_SUCCESS, payload: response})
+      ({ type: AuthActions.LOG_IN_SUCCESS, payload: response })
       :
-      ({type: AuthActions.LOG_IN_FAILURE, payload: response})
+      ({ type: AuthActions.LOG_IN_FAILURE, payload: response })
   }
 
   private log_error = (err: any) => {
+    // TODO: remove console.log() for prod, eventually make it environment dependent
     console.log(err);
     return EMPTY;
   }
