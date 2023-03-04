@@ -1,8 +1,8 @@
 import { User } from "src/app/sp-common/model/User";
 
-export type SignupFormData = {
+export type AuthFormData = {
   // NOTE: It is set at signup from the signup form and it is used at signup completion for choosing the storage for the auth data
-  stayLoggedIn: boolean;
+  rememberUser: boolean;
 }
 
 export interface AuthStore {
@@ -10,13 +10,13 @@ export interface AuthStore {
   authToken: string;
   userData: User;
 
-  signUpForm: SignupFormData
+  authFormData: AuthFormData
 }
 
 export const initialState: AuthStore = {
   isActionInProgress: false,
-  signUpForm: {
-    stayLoggedIn: false,
+  authFormData: {
+    rememberUser: false,
   },
   authToken: '',
   userData: {

@@ -12,9 +12,17 @@ const routes: Routes = [
     path: '', pathMatch: 'prefix', component: PasswordResetBootComponent, children: [
       { path: '', pathMatch: 'prefix', redirectTo: 'forgotPassword' },
       { path: 'forgotPassword', component: ForgotPasswordComponent },
+
+      // TODO: this should only beaccessible if we are sure that there was a forgot password request
       { path: 'emailVerification', component: EmailVerification },
+
+      // TODO: this soulh only be accessible if we have a valid token
       { path: 'setNewPassword', component: SetNewPasswordComponent },
+
+      // TODO: this should only be accessible if there was a password reset
       { path: 'passwordReset', component: PasswordResetCompleteComponent },
+
+      // TODO: this should only be accessible if there was a password reset
       { path: 'resetFailure', component: ResetFailureComponent }
     ]
   }

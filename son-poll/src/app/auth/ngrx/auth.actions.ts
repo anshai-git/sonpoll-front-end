@@ -4,16 +4,17 @@ import { LogInRequest } from '../../sp-common/request/log-in.request';
 import { ApiResponse } from '../../sp-common/api/ApiResponse';
 import { LogInResponse } from '../../sp-common/response/log-in.response';
 import { User } from 'src/app/sp-common/model/User';
-import { SignupFormData } from './auth.store';
+import { AuthFormData } from './auth.store';
 
 // TODO: at logout we should clear / reset the whole ngrx store !!!
-
 export enum AuthActions {
   SET_ACTION_STATUS = 'SET_ACTION_STATUS',
 
   LOG_IN = 'LOG_IN',
   LOG_IN_SUCCESS = 'LOG_IN_SUCCESS',
   LOG_IN_FAILURE = 'LOG_IN_FAILURE',
+
+  LOAD_AUTH_DATA = 'LOAD_AUTH_DATA',
 
   SET_AUTH_DATA = 'SET_AUTH_DATA',
   CLEAR_AUTH_DATA = 'CLEAR_AUTH_DATA',
@@ -42,6 +43,8 @@ export const logInFailure = createAction(
   props<{ payload: ApiResponse<LogInResponse> }>()
 );
 
+export const loadAuthData = createAction(AuthActions.LOAD_AUTH_DATA);
+
 export const setAuthData = createAction(
   AuthActions.SET_AUTH_DATA,
   props<{ payload: { userData: User, authToken: string } }>()
@@ -51,7 +54,7 @@ export const clearAuthData = createAction(AuthActions.CLEAR_AUTH_DATA);
 
 export const setSignupFormData = createAction(
   AuthActions.SET_SIGNUP_FORM_DATA,
-  props<{ payload: SignupFormData }>()
+  props<{ payload: AuthFormData }>()
 );
 
 export const clearSignUpFormData = createAction(AuthActions.CLEAR_SIGNUP_FORM_DATA);

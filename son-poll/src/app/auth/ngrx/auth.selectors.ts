@@ -1,14 +1,20 @@
-import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {AuthStore} from './auth.store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { AuthStore } from './auth.store';
 
-export const selectAuthState = createFeatureSelector<{ auth: AuthStore }>('auth');
+export const selectAuthState = createFeatureSelector<AuthStore>('auth');
 
 export const selectAuthActionStatus = createSelector(
   selectAuthState,
-  (authState) => authState.auth.isActionInProgress
+  (authState) => {
+    console.log({ authState })
+    return authState.isActionInProgress
+  }
 );
 
-export cosnt selectSignupFormData = createSelector(
+export const selectAuthFormData = createSelector(
   selectAuthState,
-  (authState) => authState.
-)
+  (authState) => {
+    console.log({ authState });
+    return authState?.authFormData
+  }
+);

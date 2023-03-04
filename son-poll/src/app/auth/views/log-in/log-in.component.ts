@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LogInRequest} from '../../../sp-common/request/log-in.request';
 import {ApiRequest} from '../../../sp-common/api/ApiRequest';
 import {Store} from '@ngrx/store';
-import {logIn} from '../../ngrx/auth.actions';
+import {logIn, setSignupFormData} from '../../ngrx/auth.actions';
 import {Subscription} from 'rxjs';
 import {selectAuthActionStatus} from '../../ngrx/auth.selectors';
 
@@ -25,7 +25,8 @@ export class LogInComponent implements OnInit {
   ) {
     this.logInForm = formBuilder.group({
       username: formBuilder.control('', [Validators.required]),
-      password: formBuilder.control('', [Validators.required])
+      password: formBuilder.control('', [Validators.required]),
+      rememberUser: formBuilder.control(false)
     });
   }
 
@@ -43,7 +44,7 @@ export class LogInComponent implements OnInit {
     const apiRequest: ApiRequest<LogInRequest> = ApiRequest.of(logInRequest);
     const logInActionPayload = { payload: apiRequest };
 
+    this.store$.dispatch(setSignupFormData({ payload: this.logInForm.value.rememberUser }));
     this.store$.dispatch(logIn(logInActionPayload));
   }
-
 }
