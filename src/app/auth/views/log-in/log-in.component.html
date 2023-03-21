@@ -1,0 +1,52 @@
+<div class="log-in-card">
+  <div class="title-holder">
+    <span class="color-green">S</span>
+    <span class="color-grey">on</span>
+    <span class="color-green">P</span>
+    <span class="color-grey">oll</span>
+  </div>
+
+  <div class="log-in-form-holder">
+    <form class="log-in-form" [formGroup]="log_in_form">
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" placeholder="username" formControlName="username" pInputText class="p-inputtext-sm"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input type="password" placeholder="password" formControlName="password" pInputText class="p-inputtext-sm"/>
+        </div>
+      </div>
+    </form>
+    <div class="actions-holder">
+      <div class="buttons-holder">
+        <div class="remember-user-checkbox">
+          <p-checkbox [binary]="true" formControlName="keep_logged_in"></p-checkbox>
+          <label>Remeber me</label>
+        </div>
+        <div class="forgot-password-button-holder">
+          <div class="forgot-password-button" routerLink="/pr" >forgot password?</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-actions-holder">
+      <div class="buttons-holder" *ngIf="!is_any_action_in_progress else elseCase">
+        <button pButton pRipple [disabled]="!log_in_form.valid" (click)="onLogIn()" type="button" class="p-button-rounded">Log In</button>
+        <button pButton pRipple (click)="onLogIn()" type="button" class="p-button-rounded">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
+            <path
+              d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/>
+          </svg>
+        </button>
+      </div>
+      <ng-template #elseCase>
+        <p-progressSpinner [style]="{width: '30px', height: '30px', marginTop: '.5rem'}"></p-progressSpinner>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<div class="register-btn-holder">
+  Don't have an account yet? <a routerLink="/register">&nbsp;Register here</a>.
+</div>
