@@ -8,7 +8,7 @@
     </div>
     <div class="registration-card">
       <div class="form-holder">
-        <form [formGroup]="signUpForm" class="registration-form">
+        <form [formGroup]="sign_up_form" class="registration-form">
           <div class="form-row">
             <div class="form-group">
               <input type="text" placeholder="email" formControlName="email" pInputText class="p-inputtext-sm" />
@@ -31,7 +31,7 @@
                      placeholder="confirm password"
                      pInputText
                      formControlName="passwordConfirmation"
-                     [disabled]="!signUpForm.valid">
+                     [disabled]="!sign_up_form.valid">
           </div>
           </div>
         </form>
@@ -43,7 +43,7 @@
               type="button"
               class="sign-up-button p-button-rounded p-button-outlined"
               (click)="onSignUp()"
-              [disabled]="!signUpForm.valid">
+              [disabled]="!sign_up_form.valid">
               Sign up
             </button>
             <button pButton pRipple type="button" class="google-signup-button p-button-rounded">

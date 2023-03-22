@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { RegistrationActions, signUp } from './registration.actions';
+import { clear_action_in_progress, RegistrationActions, set_action_in_progress, sign_up, sign_up_failure, sign_up_success } from './registration.actions';
 import { map, mergeMap, of, tap } from 'rxjs';
 import { RegistrationService } from './registration.service';
 import { MessageService } from 'primeng/api';
@@ -9,30 +9,31 @@ import { MessageService } from 'primeng/api';
 export class RegistrationEffects {
   constructor(
     private actions$: Actions,
-    private registrationService: RegistrationService,
-    private messageService: MessageService
+    private registration_service: RegistrationService,
+    private prime_ng_notification: MessageService
   ) { }
 
-  signUp$ = createEffect(() => this.actions$.pipe(
-    ofType(signUp),
-    mergeMap((action) => this.registrationService.signUp(action.payload)
+  sign_up$ = createEffect(() => this.actions$.pipe(
+    ofType(sign_up),
+    mergeMap((action) => this.registration_service.sign_up(action.payload)
       .pipe(
-        map(response => !response.error ? ({ type: RegistrationActions.SIGN_UP_SUCCESS, payload: response }) : ({ type: RegistrationActions.SIGN_UP_FAILURE, payload: response }))
+        map(response => !response.error ? sign_up_success({ payload: response }) : sign_up_failure({ payload: response }))
       ))
   ))
 
-  actionStart$ = createEffect(() => this.actions$.pipe(
-    ofType(signUp),
-    mergeMap(() => of(true).pipe(
-      map(value => ({ type: RegistrationActions.SET_ACTION_STATUS, payload: value }))
-    ))
+  sign_up_action_start$ = createEffect(() => this.actions$.pipe(
+    ofType(sign_up),
+    mergeMap((action) => of({ started_at: new Date(), action: action.type })
+      .pipe(
+        map((value) => set_action_in_progress({ payload: value }))
+      ))
   ))
 
-  actionEnd$ = createEffect(() => this.actions$.pipe(
+  sign_up_action_end$ = createEffect(() => this.actions$.pipe(
     ofType(RegistrationActions.SIGN_UP_SUCCESS, RegistrationActions.SIGN_UP_FAILURE),
-    mergeMap(() => of(false).pipe(
-      tap(() => this.messageService.add({ severity: 'success', summary: 'Sign up success!', detail: 'test details :)' })),
-      map(value => ({ type: RegistrationActions.SET_ACTION_STATUS, payload: value }))
+    mergeMap(() => of(RegistrationActions.SIGN_UP).pipe(
+      tap(() => this.prime_ng_notification.add({ severity: 'success', summary: 'Sign up success!', detail: 'test details :)' })),
+      map(value => clear_action_in_progress({ payload: value }))
     ))
   ))
 }

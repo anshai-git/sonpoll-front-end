@@ -1,14 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { ActionsSubject, Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import { selectActionStatus } from '../../ngrx/registration.selectors';
-import { RegistrationState } from '../../ngrx/regitration.store';
-import { SignUpRequest } from "../../../sp-common/request/sign-up.request";
-import { ApiRequest } from "../../../sp-common/api/ApiRequest";
-import { RegistrationActions, signUp } from "../../ngrx/registration.actions";
-import { ofType } from '@ngrx/effects';
-import { match } from 'match-toy';
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms'
+import { ActionsSubject, Store } from '@ngrx/store'
+import { Subscription } from 'rxjs'
+import { RegistrationState } from '../../ngrx/regitration.store'
+import { SignUpRequest } from "../../../sp-common/request/sign-up.request"
+import { ApiRequest } from "../../../sp-common/api/ApiRequest"
+import { RegistrationActions, sign_up } from "../../ngrx/registration.actions"
+import { ofType } from '@ngrx/effects'
+import { match } from 'match-toy'
+import { Router } from '@angular/router'
+import { is_action_in_progress } from '../../ngrx/registration.selectors'
 
 @Component({
   selector: 'app-registration',
@@ -17,65 +18,68 @@ import { match } from 'match-toy';
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
 
-  signUpForm: FormGroup;
+  sign_up_form: FormGroup
 
   constructor(
-    private formBuilder: FormBuilder,
+    private form_builder: FormBuilder,
     private store$: Store<RegistrationState>,
-    private actions$: ActionsSubject
+    private actions$: ActionsSubject,
+    private router: Router
   ) {
-    this.signUpForm = formBuilder.group({
-      email: formBuilder.control('', [Validators.required, Validators.email]),
-      username: formBuilder.control('', [Validators.required]),
-      password: formBuilder.control('', [Validators.required]),
-      passwordConfirmation: formBuilder.control('', [Validators.required, this.checkPasswordMatching]),
-    });
+    this.sign_up_form = form_builder.group({
+      email: form_builder.control('', [Validators.required, Validators.email]),
+      username: form_builder.control('', [Validators.required]),
+      password: form_builder.control('', [Validators.required]),
+      password_confirmation: form_builder.control('', [Validators.required, this.password_confirmation_validator]),
+    })
   }
 
-  isActionInProgress!: boolean;
-  actionStatusSubscription!: Subscription;
-  registrationActionsSubscription!: Subscription;
+  is_signup_action_in_progress!: boolean
+  signup_action_status_subscription!: Subscription
+
+  actionStatusSubscription!: Subscription
+  signup_action_subscription!: Subscription
 
   ngOnInit(): void {
     this.actionStatusSubscription = this.store$
-      .select(selectActionStatus)
-      .subscribe(status => {
-        this.isActionInProgress = status;
+      .select(is_action_in_progress(RegistrationActions.SIGN_UP))
+      .subscribe(value => {
+        this.is_signup_action_in_progress = value
       })
 
-    this.registrationActionsSubscription = this.actions$
+    this.signup_action_status_subscription = this.actions$
       .pipe(
         ofType(RegistrationActions.SIGN_UP_SUCCESS,
           RegistrationActions.SIGN_UP_FAILURE)
       )
-      .subscribe(this.handleRegistrationAction)
+      .subscribe(this.handle_signup_result)
   }
 
   ngOnDestroy(): void {
-    this.actionStatusSubscription.unsubscribe();
-    this.registrationActionsSubscription.unsubscribe();
+    this.actionStatusSubscription.unsubscribe()
+    this.signup_action_status_subscription.unsubscribe()
   }
 
-  handleRegistrationAction(action: string) {
+  handle_signup_result(action: string) {
     const handler = match
-      .case(`"${RegistrationActions.SIGN_UP_SUCCESS}"`, console.log('signup success'))
-      .case(`"${RegistrationActions.SIGN_UP_FAILURE}"`, console.log('signup failure'))
+      .case(`"${RegistrationActions.SIGN_UP_SUCCESS}"`, this.router.navigate(['signupSuccess']))
+      .case(`"${RegistrationActions.SIGN_UP_FAILURE}"`, this.router.navigate(['signupFailure']))
 
-    handler(action);
+    handler(action)
   }
 
   onSignUp() {
-    const { email, username, password } = this.signUpForm.value;
-    const signUpRequest: SignUpRequest = new SignUpRequest(email, username, password);
-    const apiRequest: ApiRequest<SignUpRequest> = ApiRequest.of<SignUpRequest>(signUpRequest);
-    const actionPayload = { payload: apiRequest };
+    const { email, username, password } = this.sign_up_form.value
+    const signUpRequest: SignUpRequest = new SignUpRequest(email, username, password)
+    const apiRequest: ApiRequest<SignUpRequest> = ApiRequest.of<SignUpRequest>(signUpRequest)
+    const actionPayload = { payload: apiRequest }
 
-    this.store$.dispatch(signUp(actionPayload));
-    this.signUpForm.reset();
+    this.store$.dispatch(sign_up(actionPayload))
+    this.sign_up_form.reset()
   }
 
-  checkPasswordMatching: ValidatorFn = (confirmation: AbstractControl): ValidationErrors | null => {
-    const password = this.signUpForm?.get('password')?.value;
-    return password === confirmation.value ? null : { invalidPasswordConfirmation: true }
+  password_confirmation_validator: ValidatorFn = (confirmation: AbstractControl): ValidationErrors | null => {
+    const password = this.sign_up_form?.get('password')?.value
+    return password === confirmation.value ? null : { invalid_password_confirmation: true }
   }
 }
