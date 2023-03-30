@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LogInRequest } from '../../../sp-common/request/log-in.request';
 import { ApiRequest } from '../../../sp-common/api/ApiRequest';
 import { Store } from '@ngrx/store';
-import { AuthActions, log_in, set_signup_form_data } from '../../ngrx/auth.actions';
+import { AuthActions, log_in, set_login_form_data } from '../../ngrx/auth.actions';
 import { Subscription } from 'rxjs';
 import { is_action_in_progress } from '../../ngrx/auth.selectors';
 
@@ -46,7 +46,7 @@ export class LogInComponent implements OnInit, OnDestroy {
     const api_request: ApiRequest<LogInRequest> = ApiRequest.of(log_in_request)
     const log_in_action_payload = { payload: api_request }
 
-    this.store$.dispatch(set_signup_form_data({ payload: this.log_in_form.value.rememberUser }))
+    this.store$.dispatch(set_login_form_data({ payload: { keep_logged_in: this.log_in_form.value.keep_logged_in } }))
     this.store$.dispatch(log_in(log_in_action_payload))
   }
 }

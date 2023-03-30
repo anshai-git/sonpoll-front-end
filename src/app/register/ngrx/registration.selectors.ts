@@ -11,5 +11,8 @@ export const select_actions_in_progress = createSelector(
 
 export const is_action_in_progress = (action: RegistrationActions) => createSelector(
   select_register_state,
-  (state: RegistrationState) => !!state.actions_in_progress.find(a => a.action === action)
+  (state: RegistrationState) => {
+    console.log(state)
+return !!state.actions_in_progress.find(a => a.action === action)
+  }
 )

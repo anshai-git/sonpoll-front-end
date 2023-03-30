@@ -35,7 +35,7 @@ import { RegistrationFailureComponent } from './views/registration-failure/regis
     ToastModule,
     ProgressSpinnerModule,
     InputTextModule,
-    StoreModule.forFeature('registration', {register: registrationReducer}),
+    StoreModule.forFeature('registration', registrationReducer),
     EffectsModule.forFeature([RegistrationEffects]),
     ButtonModule,
     RippleModule,

@@ -14,8 +14,8 @@ import { AuthData, AuthService } from './auth.service';
 import { ApiResponse } from '../../sp-common/api/ApiResponse';
 import { LogInResponse } from '../../sp-common/response/log-in.response';
 import { isSome, Option, Some } from 'fp-ts/lib/Option';
-import { ActionInProgress } from "./auth.store";
 import { Router } from "@angular/router";
+import { ActionInProgress } from 'src/app/sp-common/types';
 
 @Injectable({ providedIn: 'root' })
 export class AuthEffects {
@@ -59,7 +59,7 @@ export class AuthEffects {
   action_start$ = createEffect(() => this.actions$.pipe(
     ofType(log_in),
     mergeMap((action) => of({ started_at: new Date(), action: action.type }).pipe(
-      map((value: ActionInProgress) => set_action_in_progress({ payload: value })),
+      map((value: ActionInProgress<AuthActions>) => set_action_in_progress({ payload: value })),
       catchError(this.log_error)
     ))
   ))

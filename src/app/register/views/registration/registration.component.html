@@ -30,14 +30,14 @@
                      type="password"
                      placeholder="confirm password"
                      pInputText
-                     formControlName="passwordConfirmation"
+                     formControlName="password_confirmation"
                      [disabled]="!sign_up_form.valid">
           </div>
           </div>
         </form>
         <div class="actions-holder">
           <div class="buttons-holder"
-               *ngIf="!isActionInProgress else elseBlock">
+               *ngIf="!is_signup_action_in_progress else elseBlock">
             <button
               pButton
               type="button"

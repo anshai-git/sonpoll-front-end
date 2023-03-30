@@ -10,7 +10,7 @@ export const authReducer = createReducer(
       in_progress_actions: ([...state.in_progress_actions, action.payload])
     }
   }),
-  on(AuthActions.set_signup_form_data, (state, action) => {
+  on(AuthActions.set_login_form_data, (state, action) => {
     return {
       ...state,
       auth_form_data: {

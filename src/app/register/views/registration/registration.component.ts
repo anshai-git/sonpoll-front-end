@@ -7,7 +7,6 @@ import { SignUpRequest } from "../../../sp-common/request/sign-up.request"
 import { ApiRequest } from "../../../sp-common/api/ApiRequest"
 import { RegistrationActions, sign_up } from "../../ngrx/registration.actions"
 import { ofType } from '@ngrx/effects'
-import { match } from 'match-toy'
 import { Router } from '@angular/router'
 import { is_action_in_progress } from '../../ngrx/registration.selectors'
 
@@ -44,6 +43,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.actionStatusSubscription = this.store$
       .select(is_action_in_progress(RegistrationActions.SIGN_UP))
       .subscribe(value => {
+        console.log(value);
         this.is_signup_action_in_progress = value
       })
 
@@ -52,7 +52,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         ofType(RegistrationActions.SIGN_UP_SUCCESS,
           RegistrationActions.SIGN_UP_FAILURE)
       )
-      .subscribe(this.handle_signup_result)
+      .subscribe(this.handle_signup_result.bind(this))
   }
 
   ngOnDestroy(): void {
@@ -60,12 +60,18 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.signup_action_status_subscription.unsubscribe()
   }
 
-  handle_signup_result(action: string) {
-    const handler = match
-      .case(`"${RegistrationActions.SIGN_UP_SUCCESS}"`, this.router.navigate(['signupSuccess']))
-      .case(`"${RegistrationActions.SIGN_UP_FAILURE}"`, this.router.navigate(['signupFailure']))
-
-    handler(action)
+  handle_signup_result(action: any) {
+    switch (action.type) {
+      case RegistrationActions.SIGN_UP_SUCCESS:
+        this.router.navigate(['signupSuccess'])
+        break;
+      case RegistrationActions.SIGN_UP_FAILURE:
+        this.router.navigate(['signupFailure'])
+        break;
+      default:
+        this.router.navigate(['not-found'])
+        break;
+    }
   }
 
   onSignUp() {
