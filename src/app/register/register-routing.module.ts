@@ -8,7 +8,7 @@ import { RegistrationComponent } from './views/registration/registration.compone
 const routes: Routes = [
   {
     path: '', pathMatch: 'prefix', component: RegisterBootComponent, children: [
-      { path: '', pathMatch: 'prefix', redirectTo: 'create-account' },
+      { path: '', pathMatch: 'prefix', redirectTo: 'signup' },
       { path: 'signup', component: RegistrationComponent },
       { path: 'signupSuccess', component: RegistrationSuccessComponent },
       { path: 'signupFailure', component: RegistrationFailureComponent },

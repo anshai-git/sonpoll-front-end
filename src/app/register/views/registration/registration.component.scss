@@ -16,10 +16,11 @@
   align-items: center;
 
   .title-holder {
-    font-family: 'Poppins', sans-serif;
-    text-transform: uppercase;
+    font-family: Iosevka, sans-serif;
     font-weight: 900;
-    font-size: 3.5rem;
+    font-style: italic;
+    font-size: 5rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -33,23 +34,22 @@
       flex-direction: column;
 
       .label {
-        font-family: 'Roboto', sans-serif;
+        font-family: Iosevka, sans-serif;
         font-weight: 300;
-        margin: .5rem 0;
+        margin: 0.5rem 0;
       }
 
       small {
-        font-family: 'Roboto', sans-serif;
+        font-family: Iosevka, sans-serif;
         font-weight: 300;
         transform: translate(0, -50%);
-        font-size: .7rem;
+        font-size: 0.7rem;
       }
 
       input {
-        border-radius: 2rem;
-        padding: .7rem 1.2rem;
-        margin: .5rem 0;
-        font-family: 'Roboto', sans-serif;
+        padding: 0.7rem 1.2rem;
+        margin: 0.5rem 0;
+        font-family: Iosevka, sans-serif;
         font-weight: 300;
       }
     }
@@ -70,6 +70,17 @@
 }
 
 .sign-up-button {
+  font-family: Iosevka, sans-serif;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+  transition: 300ms all;
+
+  &:not([disabled]):hover {
+    color: #066163;
+  }
 
   &[disabled] {
     pointer-events: none;
@@ -78,8 +89,19 @@
 }
 
 .google-signup-button {
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #066163;
+  cursor: pointer;
+  transition: 500ms all;
+
+  &:hover {
+    opacity: 0.8;
+  }
 
   svg {
+    transform: translateY(1px);
     width: 1rem;
     height: 1rem;
     fill: white;
@@ -95,10 +117,9 @@
 }
 
 .login-btn-holder {
+  font-family: Iosevka, sans-serif;
   margin-top: 1rem;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  font-size: 1rem;
+  font-size: 1.1rem;
   position: fixed;
   top: 100%;
   transform: translateY(-300%);
