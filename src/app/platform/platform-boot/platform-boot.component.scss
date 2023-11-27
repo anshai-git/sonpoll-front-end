@@ -3,6 +3,7 @@
 }
 
 .sidebar-root {
+  padding: 0 1rem;
   .sidebar-title {
     display: flex;
     justify-content: center;
@@ -35,7 +36,6 @@
     display: flex;
     .create-button, .join-button {
       //background: #066163;
-      background: rgba(6, 97, 99, 0.8);
       color: white;
       font-family: 'Roboto', sans-serif;
       font-weight: 300;
@@ -45,13 +45,21 @@
       justify-content: center;
       width: 90px;
       cursor: pointer;
+      font-size: .9rem;
+      font-weight: 700;
+      transform: skew(-15deg);
+      &__text {
+        transform: skew(15deg);
+      }
     }
     .create-button {
+      background: rgba(6, 97, 99, 0.8);
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
-      border-right: 1px solid white;
     }
     .join-button {
+      color: rgba(6, 97, 99, 0.8);
+      border: 1px solid rgba(6, 97, 99, 0.8);
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
     }
