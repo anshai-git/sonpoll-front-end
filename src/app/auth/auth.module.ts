@@ -16,6 +16,7 @@ import { RippleModule } from "primeng/ripple";
 import { CheckboxModule } from "primeng/checkbox";
 import { DialogModule } from "primeng/dialog";
 import { initial_state } from './ngrx/auth.store';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { initial_state } from './ngrx/auth.store';
     CheckboxModule,
     FormsModule,
     DialogModule,
+    ToastModule,
     EffectsModule.forFeature([AuthEffects]),
     StoreModule.forFeature('auth', authReducer, { initialState: initial_state }),
   ],

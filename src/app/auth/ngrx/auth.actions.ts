@@ -9,7 +9,8 @@ import { ActionInProgress } from 'src/app/sp-common/types'
 
 // TODO: at logout we should clear / reset the whole ngrx store !!!
 export enum AuthActions {
-  SET_ACTION_STATUS = 'SET_ACTION_STATUS',
+  SET_ACTION_IN_PROGRESS = 'SET_ACTION_IN_PROGRESS',
+  UNSET_SET_ACTION_IN_PROGRESS = 'UNSET_SET_ACTION_IN_PROGRESS',
 
   LOG_IN = 'LOG_IN',
   LOG_IN_SUCCESS = 'LOG_IN_SUCCESS',
@@ -25,12 +26,12 @@ export enum AuthActions {
 }
 
 export const set_action_in_progress = createAction(
-  AuthActions.SET_ACTION_STATUS,
+  AuthActions.SET_ACTION_IN_PROGRESS,
   props<{ payload: ActionInProgress<AuthActions> }>()
 )
 
 export const unset_action_in_progress = createAction(
-  AuthActions.SET_ACTION_STATUS,
+  AuthActions.UNSET_SET_ACTION_IN_PROGRESS,
   props<{ payload: AuthActions }>()
 )
 

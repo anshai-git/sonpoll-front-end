@@ -6,6 +6,17 @@ import { ResetPasswordRequest } from '../../../sp-common/request/reset-password.
 import { MessageService } from 'primeng/api'
 import { Router } from '@angular/router'
 
+const POSSIBLE_ERRORS = new Map([
+  ["USER_NOT_FOUND", {
+    code: "User not found",
+    message: "No account found for email"
+  }],
+  ["DEFAULT", {
+    code: "Failed to send reset email",
+    message: "Something went wrong, please try again later"
+  }]
+]);
+
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -28,7 +39,7 @@ export class ForgotPasswordComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onResetPassword(): void {
     const resetRequest: ResetPasswordRequest = { ...this.resetPasswordForm.value };
@@ -39,11 +50,13 @@ export class ForgotPasswordComponent implements OnInit {
     this.isLoading = true;
 
     this.passwordResetService.sendResetRequest(apiRequest).subscribe(response => {
+      this.resetPasswordForm.reset();
       this.resetPasswordForm.enable();
       this.isLoading = false;
 
       if (response.error) {
-        this.primeToast.add({severity:'error', summary:'Failed to send reset email', detail:'No account found with the given email'});
+        const error = POSSIBLE_ERRORS.get(response.error.code) || POSSIBLE_ERRORS.get("DEFAULT");
+        this.primeToast.add({ severity: 'error', summary: error?.code, detail: error?.message });
       } else {
         this.router.navigate(['pr', 'emailVerification'])
       }

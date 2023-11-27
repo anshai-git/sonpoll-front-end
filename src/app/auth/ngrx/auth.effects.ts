@@ -17,12 +17,14 @@ import { isSome, Option, Some } from 'fp-ts/lib/Option';
 import { Router } from "@angular/router";
 import { ActionInProgress } from 'src/app/sp-common/types';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthEffects {
   constructor(
     private actions$: Actions,
     private auth_service: AuthService,
-    private router: Router
+    private router: Router,
   ) {
   }
 
