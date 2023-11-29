@@ -10,6 +10,7 @@ import { UserAccountComponent } from './views/user-account/user-account.componen
 import { EditPollComponent } from './views/edit-poll/edit-poll.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import {SplitterModule} from 'primeng/splitter';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {SplitterModule} from 'primeng/splitter';
   imports: [
     CommonModule,
     PlatformRoutingModule,
-    SplitterModule
+    SplitterModule,
+    ReactiveFormsModule
   ]
 })
 export class PlatformModule { }

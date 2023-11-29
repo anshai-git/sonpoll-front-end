@@ -50,12 +50,16 @@ export class ForgotPasswordComponent implements OnInit {
     this.isLoading = true;
 
     this.passwordResetService.sendResetRequest(apiRequest).subscribe(response => {
+      console.log(response);
       this.resetPasswordForm.reset();
       this.resetPasswordForm.enable();
       this.isLoading = false;
 
       if (response.error) {
-        const error = POSSIBLE_ERRORS.get(response.error.code) || POSSIBLE_ERRORS.get("DEFAULT");
+        let error = POSSIBLE_ERRORS.get(response.error.code) || POSSIBLE_ERRORS.get("DEFAULT");
+        this.primeToast.add({ severity: 'error', summary: error?.code, detail: error?.message });
+      } else if (!response.payload) {
+        let error = POSSIBLE_ERRORS.get("DEFAULT");
         this.primeToast.add({ severity: 'error', summary: error?.code, detail: error?.message });
       } else {
         this.router.navigate(['pr', 'emailVerification'])

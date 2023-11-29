@@ -14,7 +14,6 @@ export function passwordResetResponse(request: any): ApiResponse<ResetPasswordRe
     .with('valid@test.com', () => ({ payload: response, error: null }))
     .with('notfound@test.com', () => ({ payload: error_response, error: null }))
     .otherwise(() => ({ payload: null, error: null }));
-
   return result as ApiResponse<ResetPasswordResponse>;
 }
 

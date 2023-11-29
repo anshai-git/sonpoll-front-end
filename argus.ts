@@ -24,13 +24,18 @@ abstract class MatcherBase<T> implements Matcher<T> {
     if (!this.options.size) return this.default_result;
   }
 
+  protected default(): any {
+    return typeof this.default_result === "function" ?
+      this.default_result() : this.default_result;
+  }
+
   resolve(result_generator: any) {
     if (typeof result_generator === "string" ||
       typeof result_generator === "number") return result_generator;
     if (typeof result_generator === "function")
       return (result_generator as Function)(this.target);
 
-    return this.default_result;
+    return this.default();
   }
 
   public with(option: any, result: any): Matcher<T> {
@@ -56,7 +61,7 @@ class NUM_Matcher extends MatcherBase<number> {
   override run(): any {
     super.run();
     const result_generator = this.options.get(this.target);
-    if (!result_generator) return this.default_result;
+    if (!result_generator) return this.default();
     return super.resolve(result_generator);
   }
 }
@@ -73,6 +78,6 @@ class STR_Matcher extends MatcherBase<string> {
   override run(): any {
     super.run();
     return this.options.has(this.target) ?
-      this.options.get(this.target) : this.default_result;
+      this.options.get(this.target) : this.default();
   }
 }

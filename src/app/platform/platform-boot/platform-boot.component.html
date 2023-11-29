@@ -1,33 +1,33 @@
-<p-splitter [style]="{'height': '100vh', 'width': '100%'}" [panelSizes]="[20,80]" [minSizes]="[15,70]">
-  <ng-template pTemplate>
+<div class="root-layout">
+  <div class="sidebar-wrapper">
     <div class="sidebar-root">
-      <div class="sidebar-title">
-        <div class="title-holder">
-          <span class="color-green">S</span>
-          <span class="color-grey">on</span>
-          <span class="color-green">P</span>
-          <span class="color-grey">oll</span>
-        </div>
-      </div>
-      <div class="main-button-holder">
-        <div class="create-join-button">
-          <div class="create-button">
-            <div class="create-button__text">
-              CREATE
-            </div>
-          </div>
-          <div class="join-button">
-            <div class="join-button__text">
-              JOIN
-            </div>
+      <div class="sidebar-main">
+        <div class="sidebar-title">
+          <div class="title-holder">
+            <div class="title-logo">SP</div>
+            <div class="title-label">SonPoll</div>
           </div>
         </div>
-      </div>
-      <div class="content-holder">
+        <div class="content-holder">
+        </div>
+        <div class="main-button-holder">
+          <div class="create-join-button">
+            <div class="create-button">
+              <div class="create-button__text">
+                CREATE
+              </div>
+            </div>
+            <div class="join-button">
+              <div class="join-button__text">
+                JOIN
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </ng-template>
-  <ng-template pTemplate>
+  </div>
+  <div class="view-wrapper">
     <router-outlet></router-outlet>
-  </ng-template>
-</p-splitter>
+  </div>
+</div>
