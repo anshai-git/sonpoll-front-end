@@ -34,7 +34,9 @@ export class CreatePollComponent implements OnInit {
     const fb = this.formBuilder;
     return fb.group({
       title: fb.control('', [Validators.required]),
-      questions: fb.array([])
+      questions: fb.array([
+        this.create_question()
+      ])
     })
   }
 
@@ -58,7 +60,7 @@ export class CreatePollComponent implements OnInit {
   }
 
   add_question(): void {
-    this.questions.  push(this.create_question());
+    this.questions.push(this.create_question());
   }
 
   delete_question(i: number): void {
@@ -75,4 +77,9 @@ export class CreatePollComponent implements OnInit {
       .removeAt(option_index);
   }
 
+  on_save(): void {
+    console.log(this.new_poll_form.value);
+  }
+
 }
+

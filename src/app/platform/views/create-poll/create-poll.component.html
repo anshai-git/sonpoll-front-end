@@ -1,5 +1,12 @@
 <div class="page-root">
-  <div class="page-title">Create new poll</div>
+  <div class="page-title">
+    <div class="create-poll__label">
+      Create new poll
+    </div>
+    <button (click)="on_save()" class="create-poll__button">
+      Save
+    </button>
+  </div>
 
   <form class="new-poll-form" [formGroup]="new_poll_form">
 
@@ -51,11 +58,11 @@
               @for(option of get_answers(qi).controls; track option; let ai = $index) {
               <div class="answer-item">
 
-                <div class="form-row">
+                <div class="form-row" [formGroup]="option">
 
                   <div class="form-group type-selector">
                     <label class="form-group__label">Type</label>
-                    <select class="form-group__input">
+                    <select class="form-group__input" formControlName="type">
                       <option value="text">Text</option>
                       <option value="number">Nuber</option>
                       <option value="date">Date</option>
@@ -64,7 +71,7 @@
 
                   <div class="form-group">
                     <label class="form-group__label">Value</label>
-                    <input type="text" class="form-group__input" />
+                    <input type="text" class="form-group__input" formControlName="value" />
                   </div>
 
                   <div class="form-group delete-option-button-holder">

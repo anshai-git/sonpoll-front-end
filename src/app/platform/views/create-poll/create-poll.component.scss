@@ -1,11 +1,26 @@
 .page-root {
-  width: 40%;
+  width: 80%;
   margin: 2rem auto;
 
   .page-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .create-poll__label {
       font-family: 'Quicksand', sans-serif;
       font-size:1.5rem;
       font-weight: 900;
+    }
+
+    .create-poll__button {
+      padding: 10px 15px;
+      width: min-content;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background: rgba(74, 194, 117, 0.2);
+    }
   }
 
   .new-poll-form {
@@ -53,6 +68,7 @@
             border-radius: 10px;
             border: none;
             cursor: pointer;
+            background: rgba(199, 93, 66, 0.2);
           }
         }
 
@@ -62,6 +78,7 @@
           border-radius: 10px;
           border: none;
           cursor: pointer;
+          background: rgba(199, 93, 66, 0.2);
         }
       }
 
@@ -79,6 +96,7 @@
       border-bottom: 1px solid rgba(200, 200, 200, 0.3);
 
       .add-question__button {
+        background: rgba(66, 190, 199, 0.2);
         border: none;
         padding: .6rem 1.3rem;
         border-radius: 10px;

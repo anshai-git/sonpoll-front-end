@@ -53,7 +53,7 @@ export class AuthEffects {
     mergeMap(action => of(action).pipe(
       tap(action => this.auth_service.create_auth_cookie(action.payload.payload)),
       map(action => set_auth_data({ payload: { auth_token: action.payload.payload.token, user_data: action.payload.payload.user } })),
-      map(() => this.router.navigate(['platform'])),
+      map(() => this.router.navigate(['web'])),
       catchError(this.log_error)
     ))
   ), { dispatch: false })
